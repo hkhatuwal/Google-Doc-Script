@@ -10,6 +10,8 @@ const Toast = Swal.mixin({
     }
 });
 let researches=[]
+
+const BASE_URL="https://hidden-waterfall-64289.pktriot.net/sparkai"
 $(document).ready(function () {
     $('#refresh').click(function (e) {
         getAllResearches()
@@ -70,7 +72,7 @@ $('#start-research').click(function () {
 
 
 function callResearchStartApi(content, documentId) {
-    const url = "https://hidden-waterfall-64289.pktriot.net/sparkai/api/research/google-doc";
+    const url = BASE_URL+"/api/research/google-doc";
     $.post(url, {
         content_to_be_researched: content,
         doc_id: documentId
@@ -84,16 +86,18 @@ function callResearchStartApi(content, documentId) {
 
 function callResearchFetchApi(docId) {
 
-    const url = "https://hidden-waterfall-64289.pktriot.net/sparkai/api/research/google-doc?doc_id=" + docId;
+    const url =BASE_URL+ "/api/research/google-doc?doc_id=" + docId;
     $.get(url, function (res) {
         let html = ""
         researches=res.researches;
         res.researches.forEach(function (item, index) {
-            html += `<div class='col-12 card my-2' style="cursor: pointer;" onclick="copyResearchContentToClipboard(${item.id})">
+            html += `<div class='col-12 card my-2 d-flex flex-row align-items-center' style="cursor: pointer;" onclick="copyResearchContentToClipboard(${item.id})">
  <div class="card-body">
  <h6  data-id="${item.id}">${item.content_to_be_researched.slice(0, 60)}</h6>
  <span class="badge  bg-primary">${item.status}</span>
 </div>
+                <img style="cursor: pointer;" onclick="removeResearch(item.id) " height="50" width="50" src="https://cdn.iconscout.com/icon/free/png-256/free-delete-892-1167842.png" alt="">
+
  </div>`
         })
 
@@ -136,6 +140,14 @@ function startResearch(content) {
         .getCurrentDocumentId();
 }
 
+function removeResearch(id){
+    $.delete(BASE_URL+"/api/research/google-doc/"+id,function(result){
+        Toast.fire({
+            "icon":"success",
+            "title":"Removed successfully"
+        })
+    })
+}
 
 function copyResearchContentToClipboard(id) {
     const item= researches.find(function (item){
