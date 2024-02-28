@@ -33,7 +33,9 @@ $('#start-research').click(function () {
     var selectedType = $('input[name="content_from"]:checked').val()
     console.log(selectedType)
     if (selectedType === "custom_text") {
-        const content=$('#content-area').val()
+        const content=$('#content-input').val()
+        console.log(content)
+
         startResearch(content)
         Toast.fire({
             icon: "success",
@@ -118,7 +120,6 @@ function startResearch(content) {
         .withSuccessHandler(
             function (docId, element) {
                callResearchStartApi(content,docId)
-
             })
         .withFailureHandler(
             function (msg, element) {
