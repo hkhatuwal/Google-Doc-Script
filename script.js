@@ -71,7 +71,7 @@ function callResearchStartApi(content, documentId) {
         content_to_be_researched: content,
         doc_id: documentId
     }, function (res) {
-        console.log(res)
+        getAllResearches()
     });
 
 
