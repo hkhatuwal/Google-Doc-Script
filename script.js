@@ -18,7 +18,9 @@ $(document).ready(function () {
 
 
     $('.research-item').click(function (e) {
+        console.log("Clicked")
         const id=$(this).data('id')
+        console.log(id)
        const item= researches.find(function (item){
             return item.id=id;
         })
