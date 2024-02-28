@@ -174,3 +174,20 @@ function copyToClipboard(text) {
         title: "Copied to clipboard"
     });
 }
+
+
+function onImageClick(url){
+    google.script.run
+        .withSuccessHandler(
+            function (docId, element) {
+                console.log("success")
+            })
+        .withFailureHandler(
+            function (msg, element) {
+                Toast.fire({
+                    icon: "error",
+                    title: msg
+                });
+            })
+        .insertImage(url);
+}

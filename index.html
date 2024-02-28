@@ -74,15 +74,37 @@
             <button class="btn btn-success mt-2 float-end" id="refresh">Fetch Previous Researches</button>
 
         </div>
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Research</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Image</button>
+            </li>
 
-        <div class="row researches">
-            <div class='col-12 card my-2 d-flex flex-row align-items-center'>
-                <div class="card-body">
-                    <h6 class="research-item" data-id="1" style="cursor: pointer;">${item.content_to_be_researched.slice(0, 60)}</h6>
-                    <span class="badge bg-primary">${item.status}</span>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                <div class="row researches">
+                    <div class='col-12 card my-2 d-flex flex-row align-items-center'>
+                        <div class="card-body">
+                            <h6 class="research-item" data-id="1" style="cursor: pointer;">${item.content_to_be_researched.slice(0, 60)}</h6>
+                            <span class="badge bg-primary">${item.status}</span>
 
+                        </div>
+                        <img height="50" width="50" onclick="removeResearch(1)" src="https://cdn.iconscout.com/icon/free/png-256/free-delete-892-1167842.png" alt="">
+                    </div>
                 </div>
-                <img height="50" width="50" onclick="removeResearch(1)" src="https://cdn.iconscout.com/icon/free/png-256/free-delete-892-1167842.png" alt="">
+            </div>
+            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                <div class="row">
+                    <div class="col-4">
+                        <img class="w-100 h-100" onclick="onImageClick('https://s0.2mdn.net/simgad/11760989474954978370')" src="https://s0.2mdn.net/simgad/11760989474954978370" alt="">
+                    </div>
+                    <div class="col-4">
+                        <img class="w-100 h-100"  onclick="onImageClick('https://s0.2mdn.net/simgad/11760989474954978370')" src="https://plus.unsplash.com/premium_photo-1661962454473-920849973bc9?q=80&w=1160&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
+                    </div>
+                </div>
             </div>
         </div>
     </div>

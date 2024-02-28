@@ -230,3 +230,15 @@ function translateText(text, origin, dest) {
 function getCurrentDocumentId() {
   return DocumentApp.getActiveDocument().getId();
 }
+
+function insertImage(imageUrl){
+  var blob = UrlFetchApp.fetch(imageUrl).getBlob();
+  var doc = DocumentApp.getActiveDocument();
+  var cursor = doc.getCursor();
+  if (cursor) {
+    cursor.insertInlineImage(blob);
+  } else {
+    doc.getBody().insertImage(0, imageUrl);
+  }
+  return "done";
+}
