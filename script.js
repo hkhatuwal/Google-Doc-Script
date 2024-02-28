@@ -101,8 +101,8 @@ function callResearchFetchApi(docId) {
         res.researches.forEach(function (item, index) {
             html += `<div class='col-12 card my-2'>
  <div class="card-body">
- <h6 style="cursor:pointer;" data-id="${item.id}">${item.content_to_be_researched.slice(0, 60)}</h6>
- <span class="badge badge-primary">${item.status}</span>
+ <h6 style="cursor:pointer;" class="research-item" data-id="${item.id}">${item.content_to_be_researched.slice(0, 60)}</h6>
+ <span class="badge  bg-primary">${item.status}</span>
 </div>
  </div>`
         })
