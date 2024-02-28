@@ -85,7 +85,7 @@ function callResearchStartApi(content, documentId) {
 
 
 function callResearchFetchApi(docId) {
-
+    $('.researches').empty()
     const url =BASE_URL+ "/api/research/google-doc?doc_id=" + docId;
     $.get(url, function (res) {
         let html = ""
@@ -150,7 +150,6 @@ function removeResearch(id){
                 "icon":"success",
                 "title":"Removed successfully"
             })
-
             getAllResearches()
         }
     });
