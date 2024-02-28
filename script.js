@@ -91,8 +91,8 @@ function callResearchFetchApi(docId) {
         let html = ""
         researches=res.researches;
         res.researches.forEach(function (item, index) {
-            html += `<div class='col-12 card my-2 d-flex flex-row align-items-center' style="cursor: pointer;" onclick="copyResearchContentToClipboard(${item.id})">
- <div class="card-body">
+            html += `<div class='col-12 card my-2 d-flex flex-row align-items-center' >
+ <div class="card-body" style="cursor: pointer;" onclick="copyResearchContentToClipboard(${item.id})">
  <h6  data-id="${item.id}">${item.content_to_be_researched.slice(0, 60)}</h6>
  <span class="badge  bg-primary">${item.status}</span>
 </div>
