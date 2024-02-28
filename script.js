@@ -141,12 +141,20 @@ function startResearch(content) {
 }
 
 function removeResearch(id){
-    $.delete(BASE_URL+"/api/research/google-doc/"+id,function(result){
-        Toast.fire({
-            "icon":"success",
-            "title":"Removed successfully"
-        })
-    })
+
+    $.ajax({
+        url: BASE_URL+"/api/research/google-doc/"+id,
+        type: 'DELETE',
+        success: function(result) {
+            Toast.fire({
+                "icon":"success",
+                "title":"Removed successfully"
+            })
+
+            getAllResearches()
+        }
+    });
+
 }
 
 function copyResearchContentToClipboard(id) {
