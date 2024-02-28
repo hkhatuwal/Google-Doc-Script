@@ -17,18 +17,6 @@ $(document).ready(function () {
     getAllResearches()
 
 
-    $('.research-item').click(function (e) {
-        console.log("Clicked")
-        const id=$(this).data('id')
-        console.log(id)
-       const item= researches.find(function (item){
-            return item.id=id;
-        })
-        console.log(item)
-        if(item && item.status==="success"){
-            copyToClipboard(item.researched_content)
-        }
-    })
 })
 
 
@@ -101,9 +89,9 @@ function callResearchFetchApi(docId) {
         let html = ""
         researches=res.researches;
         res.researches.forEach(function (item, index) {
-            html += `<div class='col-12 card my-2'>
+            html += `<div class='col-12 card my-2' style="cursor: pointer;" onclick="copyResearchContentToClipboard(${item.id})">
  <div class="card-body">
- <h6 style="cursor:pointer;" class="research-item" data-id="${item.id}">${item.content_to_be_researched.slice(0, 60)}</h6>
+ <h6  data-id="${item.id}">${item.content_to_be_researched.slice(0, 60)}</h6>
  <span class="badge  bg-primary">${item.status}</span>
 </div>
  </div>`
@@ -146,6 +134,17 @@ function startResearch(content) {
                 });
             })
         .getCurrentDocumentId();
+}
+
+
+function copyResearchContentToClipboard(id) {
+    const item= researches.find(function (item){
+        return item.id=id;
+    })
+    console.log(item)
+    if(item && item.status==="success"){
+        copyToClipboard(item.researched_content)
+    }
 }
 
 
