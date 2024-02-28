@@ -96,7 +96,7 @@ function callResearchFetchApi(docId) {
  <h6  data-id="${item.id}">${item.content_to_be_researched.slice(0, 60)}</h6>
  <span class="badge  bg-primary">${item.status}</span>
 </div>
-                <img style="cursor: pointer;" onclick="removeResearch(item.id) " height="50" width="50" src="https://cdn.iconscout.com/icon/free/png-256/free-delete-892-1167842.png" alt="">
+                <img style="cursor: pointer;" onclick="removeResearch(${item.id})" height="50" width="50" src="https://cdn.iconscout.com/icon/free/png-256/free-delete-892-1167842.png" alt="">
 
  </div>`
         })
