@@ -11,10 +11,10 @@ const Toast = Swal.mixin({
 });
 let researches=[]
 $(document).ready(function () {
-    // $('#refresh').click(function (e) {
-    //     getAllResearches()
-    // })
-    // getAllResearches()
+    $('#refresh').click(function (e) {
+        getAllResearches()
+    })
+    getAllResearches()
 
 
     $('.research-item').click(function (e) {
