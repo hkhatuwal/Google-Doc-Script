@@ -9,12 +9,24 @@ const Toast = Swal.mixin({
         toast.onmouseleave = Swal.resumeTimer;
     }
 });
-
+let researches=[]
 $(document).ready(function () {
-    $('#refresh').click(function (e){
-getAllResearches()
+    // $('#refresh').click(function (e) {
+    //     getAllResearches()
+    // })
+    // getAllResearches()
+
+
+    $('.research-item').click(function (e) {
+        const id=$(this).data('id')
+       const item= researches.find(function (item){
+            return item.id=id;
+        })
+        console.log(item)
+        if(item && item.status==="success"){
+            copyToClipboard(item.researched_content)
+        }
     })
-    getAllResearches()
 })
 
 
@@ -33,7 +45,7 @@ $('#start-research').click(function () {
     var selectedType = $('input[name="content_from"]:checked').val()
     console.log(selectedType)
     if (selectedType === "custom_text") {
-        const content=$('#content-input').val()
+        const content = $('#content-input').val()
         console.log(content)
 
         startResearch(content)
@@ -81,14 +93,16 @@ function callResearchStartApi(content, documentId) {
 
 
 function callResearchFetchApi(docId) {
+
     const url = "https://hidden-waterfall-64289.pktriot.net/sparkai/api/research/google-doc?doc_id=" + docId;
     $.get(url, function (res) {
-
         let html = ""
+        researches=res.researches;
         res.researches.forEach(function (item, index) {
             html += `<div class='col-12 card my-2'>
  <div class="card-body">
- <h6>${item.content_to_be_researched.slice(0, 60)}</h6>
+ <h6 style="cursor:pointer;" data-id="${item.id}">${item.content_to_be_researched.slice(0, 60)}</h6>
+ <span class="badge badge-primary">${item.status}</span>
 </div>
  </div>`
         })
@@ -98,7 +112,7 @@ function callResearchFetchApi(docId) {
 }
 
 
-function  getAllResearches(){
+function getAllResearches() {
 
     google.script.run
         .withSuccessHandler(
@@ -115,11 +129,12 @@ function  getAllResearches(){
             })
         .getCurrentDocumentId();
 }
+
 function startResearch(content) {
     google.script.run
         .withSuccessHandler(
             function (docId, element) {
-               callResearchStartApi(content,docId)
+                callResearchStartApi(content, docId)
             })
         .withFailureHandler(
             function (msg, element) {
@@ -132,3 +147,10 @@ function startResearch(content) {
 }
 
 
+function copyToClipboard(text) {
+    navigator.clipboard.writeText(text);
+    Toast.fire({
+        icon: "success",
+        title: "Copied to clipboard"
+    });
+}
