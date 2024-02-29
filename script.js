@@ -114,7 +114,7 @@ function callFetchResearchImageFetchApi(docId) {
         researches=res.researches;
         res.researches.forEach(function (imageUrl, index) {
             html += `<div class='col-4' >
-                <img style="cursor: pointer;width: 100%;height: 100%;" onclick="onImageClick('${imageUrl}')" height="50" width="50" src="${imageUrl}" alt="">
+                <img style="cursor: pointer;width: 100%;height: 100%;" onclick="onImageClick(this,'${imageUrl}')" height="50" width="50" src="${imageUrl}" alt="">
 
  </div>`
         })
@@ -211,18 +211,19 @@ function copyToClipboard(text) {
 }
 
 
-function onImageClick(url){
+function onImageClick(e,url){
+    e.target.src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif"
     google.script.run
         .withSuccessHandler(
             function (docId, element) {
-                console.log("success")
+e.target.src=url
+
+
             })
         .withFailureHandler(
             function (msg, element) {
-                Toast.fire({
-                    icon: "error",
-                    title: msg
-                });
+                e.target.src=url
+
             })
         .insertImage(url);
 }
