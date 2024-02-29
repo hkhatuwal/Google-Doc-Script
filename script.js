@@ -212,11 +212,12 @@ function copyToClipboard(text) {
 
 
 function onImageClick(e,url){
-    e.target.src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif"
+    e.src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif"
     google.script.run
         .withSuccessHandler(
             function (docId, element) {
-e.target.src=url
+e.src=url
+
 
 
             })
