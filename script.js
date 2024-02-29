@@ -11,7 +11,7 @@ const Toast = Swal.mixin({
 });
 let researches=[]
 
-const BASE_URL="https://hidden-waterfall-64289.pktriot.net/sparkai"
+const BASE_URL="https://related-emissions-tony-privacy.trycloudflare.com/sparkai"
 $(document).ready(function () {
     $('#refresh').click(function (e) {
         getAllResearches()
