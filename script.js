@@ -15,9 +15,11 @@ const BASE_URL="https://hidden-waterfall-64289.pktriot.net/sparkai"
 $(document).ready(function () {
     $('#refresh').click(function (e) {
         getAllResearches()
+        callFetchResearchImageFetchApi();
+
     })
     getAllResearches()
-
+    callFetchResearchImageFetchApi();
 
 })
 
@@ -39,7 +41,6 @@ $('#start-research').click(function () {
     if (selectedType === "custom_text") {
         const content = $('#content-input').val()
         console.log(content)
-
         startResearch(content)
         Toast.fire({
             icon: "success",
@@ -72,10 +73,12 @@ $('#start-research').click(function () {
 
 
 function callResearchStartApi(content, documentId) {
+    var researchType = $('select[name="research_type"]').val()
     const url = BASE_URL+"/api/research/google-doc";
     $.post(url, {
         content_to_be_researched: content,
-        doc_id: documentId
+        doc_id: documentId,
+        type:researchType
     }, function (res) {
         getAllResearches()
     });
@@ -86,7 +89,7 @@ function callResearchStartApi(content, documentId) {
 
 function callResearchFetchApi(docId) {
     $('.researches').empty()
-    const url =BASE_URL+ "/api/research/google-doc?doc_id=" + docId;
+    const url =BASE_URL+ "/api/research/google-doc?type=text&doc_id=" + docId;
     $.get(url, function (res) {
         let html = ""
         researches=res.researches;
@@ -104,8 +107,41 @@ function callResearchFetchApi(docId) {
         $('.researches').append(html)
     });
 }
+function callFetchResearchImageFetchApi(docId) {
+    $('.research-images').empty()
+    const url =BASE_URL+ "/api/research/google-doc?type=images&doc_id=" + docId;
+    $.get(url, function (res) {
+        let html = ""
+        researches=res.researches;
+        res.researches.forEach(function (imageUrl, index) {
+            html += `<div class='col-4' >
+                <img style="cursor: pointer;width: 100%;height: 100%;" onclick="onImageClick(${imageUrl})" height="50" width="50" src="${imageUrl}" alt="">
+
+ </div>`
+        })
+
+        $('.research-images').append(html)
+    });
+}
 
 
+function getAllResearches() {
+
+    google.script.run
+        .withSuccessHandler(
+            function (docId, element) {
+                callResearchFetchApi(docId)
+
+            })
+        .withFailureHandler(
+            function (msg, element) {
+                Toast.fire({
+                    icon: "error",
+                    title: msg
+                });
+            })
+        .getCurrentDocumentId();
+}
 function getAllResearches() {
 
     google.script.run

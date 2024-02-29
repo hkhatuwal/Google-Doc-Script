@@ -27,9 +27,9 @@
     <div class="row">
         <div class="col-12">
             <label for="inputState" class="form-label">Research Type</label>
-            <select id="inputState" class="form-select">
-                <option selected>Text</option>
-                <option >Image</option>
+            <select id="inputState" name="research_type" class="form-select">
+                <option value="text" selected>Text</option>
+                <option value="image" >Image</option>
             </select>
         </div>
 
@@ -97,13 +97,9 @@
                 </div>
             </div>
             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                <div class="row">
-                    <div class="col-4">
-                        <img class="w-100 h-100" onclick="onImageClick('https://s0.2mdn.net/simgad/11760989474954978370')" src="https://s0.2mdn.net/simgad/11760989474954978370" alt="">
-                    </div>
-                    <div class="col-4">
-                        <img class="w-100 h-100"  onclick="onImageClick('https://s0.2mdn.net/simgad/11760989474954978370')" src="https://plus.unsplash.com/premium_photo-1661962454473-920849973bc9?q=80&w=1160&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
-                    </div>
+                <div class="row research-images">
+
+
                 </div>
             </div>
         </div>
