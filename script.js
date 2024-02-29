@@ -114,7 +114,7 @@ function callFetchResearchImageFetchApi(docId) {
         researches=res.researches;
         res.researches.forEach(function (imageUrl, index) {
             html += `<div class='col-4' >
-                <img style="cursor: pointer;width: 100%;height: 100%;" onclick="onImageClick(${imageUrl})" height="50" width="50" src="${imageUrl}" alt="">
+                <img style="cursor: pointer;width: 100%;height: 100%;" onclick="onImageClick('${imageUrl}')" height="50" width="50" src="${imageUrl}" alt="">
 
  </div>`
         })
