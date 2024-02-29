@@ -15,12 +15,11 @@ const BASE_URL="https://hidden-waterfall-64289.pktriot.net/sparkai"
 $(document).ready(function () {
     $('#refresh').click(function (e) {
         getAllResearches()
-        callFetchResearchImageFetchApi();
+        getAllImageResearched()
 
     })
     getAllResearches()
-    callFetchResearchImageFetchApi();
-
+    getAllImageResearched()
 })
 
 
@@ -142,12 +141,12 @@ function getAllResearches() {
             })
         .getCurrentDocumentId();
 }
-function getAllResearches() {
+function getAllImageResearched() {
 
     google.script.run
         .withSuccessHandler(
             function (docId, element) {
-                callResearchFetchApi(docId)
+                callFetchResearchImageFetchApi(docId)
 
             })
         .withFailureHandler(
