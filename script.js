@@ -11,7 +11,7 @@ const Toast = Swal.mixin({
 });
 let researches=[]
 
-const BASE_URL="https://related-emissions-tony-privacy.trycloudflare.com/sparkai"
+const BASE_URL="https://dev24.spark.sapience.club"
 $(document).ready(function () {
     $('#refresh').click(function (e) {
         getAllResearches()
@@ -49,9 +49,8 @@ $('#start-research').click(function () {
     } else {
         google.script.run
             .withSuccessHandler(
-                function (text, element) {
-                    console.log(text)
-                    startResearch(text)
+                function (data, element) {
+                    startResearch(data.text)
                     Toast.fire({
                         icon: "success",
                         title: "Research Started"
